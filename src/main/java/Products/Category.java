@@ -5,7 +5,7 @@ import java.util.List;
 public class ProductPack {
 
     private List<Product> productInPack;
-    private PackType packType;
+    private Category catname;
 
     public void addToPack(){
         //TODO

@@ -1,6 +1,8 @@
+
+
 package Products;
 
-public enum PackType {
+public enum Category {
 
     FACIAL_PRODUCTS,
     BODY_PRODUCTS,
