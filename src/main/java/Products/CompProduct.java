@@ -1,2 +1,9 @@
-package Products;public class CompProduct {
+package Products;
+
+public class CompProduct {
+
+    public void replenishStock(){
+        //TODO
+    }
+
 }

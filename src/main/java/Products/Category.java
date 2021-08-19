@@ -2,10 +2,10 @@ package Products;
 
 import java.util.List;
 
-public class ProductPack {
+public class Category {
 
     private List<Product> productInPack;
-    private Category catname;
+    private CategoryName catname;
 
     public void addToPack(){
         //TODO

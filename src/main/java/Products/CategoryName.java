@@ -2,7 +2,7 @@
 
 package Products;
 
-public enum Category {
+public enum CategoryName {
 
     FACIAL_PRODUCTS,
     BODY_PRODUCTS,

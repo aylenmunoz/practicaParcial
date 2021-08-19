@@ -1,5 +1,6 @@
 package Client;
 
+import Products.Product;
 import Sale.Cart;
 
 import java.util.List;
@@ -18,12 +19,13 @@ public class Client {
         // TODO
     }
 
-    public void addToCart(){
-        // TODO
+    public void addToCart(Product product){
+        cart.addToCart(product);
+
     }
 
-    public void removeFromCart(){
-        // TODO
+    public void removeFromCart(Product product){
+        cart.removeFromCart(product);
     }
 
 

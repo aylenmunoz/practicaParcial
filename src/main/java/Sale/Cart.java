@@ -3,6 +3,7 @@ package Sale;
 import Products.Product;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cart {
 
@@ -10,12 +11,12 @@ public class Cart {
     private PaymentMethod paymentMethod;
     private Integer totalAmount;
 
-    public void addToCart(){
-        //TODO
+    public void addToCart(Product product){
+        products.add(product);
     }
 
-    public void removeFromCart(){
-        //TODO
+    public void removeFromCart(Product product){
+        products.remove(product);
     }
 
     public void deleteProduct(){
@@ -26,5 +27,8 @@ public class Cart {
         //TODO
     }
 
+    public void setTotalAmount(Integer totalAmount) {
+        this.totalAmount = products.stream().mapToInt(p -> p.getPrice()).sum();;
+    }
 }
 

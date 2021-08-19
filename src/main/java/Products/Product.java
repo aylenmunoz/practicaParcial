@@ -6,17 +6,25 @@ public class Product {
     private Integer amountInStock;
     private Integer price;
     private String details;
-    private State StateStock;
+    private CompProduct compProduct;
     private Integer minimumNeeded;
-    private PackType productType;
+    private CategoryName categoryName;
     private Integer amountInCart;
 
-    public void setStateStock(State stateStock) {
-        StateStock = stateStock;
+    public void setCompProduct(CompProduct compProduct) {
+        this.compProduct = compProduct;
     }
 
     public void replenishStock(){
         //TODO
     }
 
+
+
+
+
+    //getter y setters
+    public Integer getPrice() {
+        return price;
+    }
 }
