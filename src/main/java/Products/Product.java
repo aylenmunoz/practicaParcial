@@ -6,13 +6,13 @@ public class Product {
     private Integer amountInStock;
     private Integer price;
     private String details;
-    private CompProduct compProduct;
+    private State stateStock;
     private Integer minimumNeeded;
     private CategoryName categoryName;
     private Integer amountInCart;
 
-    public void setCompProduct(CompProduct compProduct) {
-        this.compProduct = compProduct;
+    public void setStateStock(State stateStock) {
+        this.stateStock = stateStock;
     }
 
     public void replenishStock(){

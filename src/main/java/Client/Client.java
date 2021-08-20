@@ -9,7 +9,6 @@ public class Client {
 
     private String name;
     private String surname;
-    private String email;
     private List<Cart> previousPurchases;
     private Cart cart;
     private String billingAddress;
