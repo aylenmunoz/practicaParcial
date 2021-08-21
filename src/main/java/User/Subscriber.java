@@ -1,4 +1,4 @@
-package Client;
+package User;
 
 public interface Subscriber {
 

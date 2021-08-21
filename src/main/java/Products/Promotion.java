@@ -1,6 +1,6 @@
 package Products;
 
-public class Promotion {
+public class Promotion extends Product{
 
     public void setSpecialPrice(){
         //TODO

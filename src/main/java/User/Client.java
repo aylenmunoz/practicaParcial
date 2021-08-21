@@ -1,11 +1,11 @@
-package Client;
+package User;
 
 import Products.Product;
 import Sale.Cart;
 
 import java.util.List;
 
-public class Client {
+public class Client extends User {
 
     private String name;
     private String surname;
@@ -27,6 +27,9 @@ public class Client {
         cart.removeFromCart(product);
     }
 
+    public void deleteAccount(){
+
+    }
 
 
 }

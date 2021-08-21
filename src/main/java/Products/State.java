@@ -1,6 +1,7 @@
 package Products;
 
-public interface State {
+public class State extends Product{
 
-    public void replenishStock();
+    public void replenishStock(){}
 }
+
