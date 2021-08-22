@@ -1,5 +1,6 @@
 package User;
 
+import Products.Category;
 import Products.CategoryName;
 import Products.Product;
 import FarmaStore.FarmaStore;
@@ -22,7 +23,7 @@ public class Administrator extends User{
         Integer price;
         String details;
         Integer minimumNeeded;
-        CategoryName catName;
+        String catName;
 
         System.out.println ("Por favor introduzca el nombre del producto");
         nameP = entradaEscaner.nextLine();
@@ -35,27 +36,32 @@ public class Administrator extends User{
         System.out.println ("Por favor introduzca la cantidad minima necesaria del producto");
         minimumNeeded = entradaEscaner.nextInt();
         System.out.println ("Por favor introduzca la categoria  del producto");
-        //catName = entradaEscaner.nextCategoryName();
-        //no se como hacer con categoryname
+        catName = entradaEscaner.nextLine();
+        CategoryName enumCat = CategoryName.valueOf(catName);
 
-        newProduct.createProduct(nameP, amountInStock, price,details,minimumNeeded/*, catName*/);
+        newProduct.createProduct(nameP, amountInStock, price,details,minimumNeeded, enumCat);
         store.addProduct(newProduct);
     }
 
     public void deleteProduct(Product product){
-
+        //TODO
     }
 
     public void addToCategory(){
-
+        //TODO
     }
 
     public void removeFromCategory(){
-
+       //TODO
     }
     public void deleteUser(User user){
         //TODO eliminar de DataBase
     }
+
+    public void createPromotion(){
+        //TODO
+    }
+
     public void replenishStock(Product product, Integer amount){
         product.replenishStock(amount);
     }

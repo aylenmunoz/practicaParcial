@@ -20,13 +20,13 @@ public class Product extends CompProduct{
         super.setState(this);
     }
 
-    public void createProduct(String nameP, Integer amountInStock, Integer price, String details, Integer minimumNeeded/*, CategoryName catName*/){
+    public void createProduct(String nameP, Integer amountInStock, Integer price, String details, Integer minimumNeeded,CategoryName enumCatName){
         this.setName(nameP);
         this.setAmountInStock(amountInStock);
         this.setPrice(price);
         this.setDetails(details);
         this.setMinimumNeeded(minimumNeeded);
-        //this.setCategoryName(catName);
+        this.setCategoryName(enumCatName);
         setState(this);
 
 
