@@ -3,7 +3,7 @@
 package Products;
 
 public enum CategoryName {
-
+    ALL_PRODUCTS,
     FACIAL_PRODUCTS,
     BODY_PRODUCTS,
     MAKEUP,

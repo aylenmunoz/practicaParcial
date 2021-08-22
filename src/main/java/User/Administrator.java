@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Administrator extends User{
     private String name;
     private static Administrator instancia;
-    FarmaStore store = FarmaStore.getInstance();
+    static FarmaStore store = FarmaStore.getInstance();
 
 
     public void addProduct(){
@@ -40,26 +40,42 @@ public class Administrator extends User{
         CategoryName enumCat = CategoryName.valueOf(catName);
 
         newProduct.createProduct(nameP, amountInStock, price,details,minimumNeeded, enumCat);
-        store.addProduct(newProduct);
+        store.addProductToStore(newProduct);
+        Category.updateCategory(enumCat);
+    }
+    //TODO esto se llama del main!!
+    public void setCategoryOrder(){
+        Scanner entradaEscaner = new Scanner (System.in);
+        System.out.println ("Introduzca 1 para ordenar las categorias, 0 para salir");
+        Integer comando = entradaEscaner.nextInt();
+        while(comando == 1) {
+
+            System.out.println("Introduzca la Categoria Padre de la Lista de Categorias, en mayuscula y con '_' en lugar de espacio");
+            String supra = entradaEscaner.nextLine();
+            CategoryName supraCat = CategoryName.valueOf(supra);
+
+            System.out.println("Introduzca la Categoria Hijo de la Lista de Categorias, en mayuscula y con '_' en lugar de espacio");
+            String sub = entradaEscaner.nextLine();
+            CategoryName subCat = CategoryName.valueOf(sub);
+
+            Category.putCategoryInSuperCategory(supraCat, subCat);
+
+            this.setCategoryOrder(); //es recursiva
+        }
+        System.out.println ("Se Salio del menu de ordenar Categorias");
     }
 
     public void deleteProduct(Product product){
-        //TODO
+        store.deleteProductFromStore(product);
     }
 
-    public void addToCategory(){
-        //TODO
-    }
-
-    public void removeFromCategory(){
-       //TODO
-    }
     public void deleteUser(User user){
+        store.removeClient(user);
         //TODO eliminar de DataBase
     }
 
     public void createPromotion(){
-        //TODO
+
     }
 
     public void replenishStock(Product product, Integer amount){
@@ -69,6 +85,7 @@ public class Administrator extends User{
     public static Administrator obtenerInstancia(){
         if (instancia == null) {
             instancia = new Administrator();
+            store.addClient(instancia);
         }
         return instancia;
     }

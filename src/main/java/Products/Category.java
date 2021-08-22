@@ -5,17 +5,25 @@ import FarmaStore.FarmaStore;
 
 public class Category extends CompProduct {
 
-    private List<Product> productInCategory;
+    private List<CompProduct> productsInCategory;
     private CategoryName catname;
 
-    public void updateCategory(CategoryName category){
-        List<Product> prodsWithCat = FarmaStore.findProductsWithCategory(category);
-        //como obtengo la lista de productos de la categoria de X nombre
-        //if()
+    public static void updateCategory(CategoryName category){
+        List<CompProduct> prodsWithCat = FarmaStore.findProductsWithCategory(category);
+        Category categoriaConNombre = obtainCatFromList(category);
+        categoriaConNombre.productsInCategory = prodsWithCat; //la igualo sin un if xq es lo mismo
     }
 
-    public void removeFromCategory(Product product){
-        //TODO
+    private static Category obtainCatFromList(CategoryName cat){
+        List<CompProduct> theCatInListType = FarmaStore.findProductsWithCategory(cat);
+        Category categoryBuscada = (Category) theCatInListType.get(0);
+        return categoryBuscada;
+    }
+
+    public static void putCategoryInSuperCategory(CategoryName supra, CategoryName sub){
+        Category supraCat = obtainCatFromList(supra);
+        Category subCat = obtainCatFromList(sub);
+        supraCat.productsInCategory.add(subCat);
     }
 
     public void setCatname(CategoryName catname) {
