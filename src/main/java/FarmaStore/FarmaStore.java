@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FarmaStore {
 
-    private List<Client> clients;
+    private List<Client> users;
     private List<Product> products;
     private List<Client> subscribers;
     private List<Promotion> promotions;
@@ -30,7 +30,7 @@ public class FarmaStore {
     }
 
     public void addClient(Client client){
-        clients.add(client);
+        users.add(client);
     }
 
     public void addPromotion(Promotion promo){

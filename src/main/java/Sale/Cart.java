@@ -27,8 +27,11 @@ public class Cart {
         //TODO
     }
 
+
+
+    //setters
     public void setTotalAmount(Integer totalAmount) {
-        this.totalAmount = products.stream().mapToInt(p -> p.getPrice()).sum();;
+        this.totalAmount = products.stream().mapToInt(p -> p.getPrice()).sum();
     }
 }
 

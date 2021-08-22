@@ -21,4 +21,5 @@ public class CompProduct {
         return product.getStateStock();
     }
 
+
 }

@@ -9,7 +9,7 @@ public class Product extends CompProduct{
     private State stateStock;
     private Integer minimumNeeded;
     private CategoryName categoryName;
-    // private Integer amountInCart;  A CHEQUEAR , COMENTE EL SET Y EL GET
+    private Integer amountInCart;
 
     public void setStateStock(State stateStock) {
         this.stateStock = stateStock;
@@ -20,10 +20,15 @@ public class Product extends CompProduct{
         super.setState(this);
     }
 
-    public void createProduct(String nameP, Integer amountInStock, Integer price, String details, Integer minimumNeeded, CategoryName catName){
+    public void createProduct(String nameP, Integer amountInStock, Integer price, String details, Integer minimumNeeded/*, CategoryName catName*/){
         this.setName(nameP);
-        //todo
-        //todo stateStock llamando comp product , amount in cart
+        this.setAmountInStock(amountInStock);
+        this.setPrice(price);
+        this.setDetails(details);
+        this.setMinimumNeeded(minimumNeeded);
+        //this.setCategoryName(catName);
+        setState(this);
+
 
     }
     // ----- SETTERS ----- //
@@ -48,13 +53,13 @@ public class Product extends CompProduct{
         this.categoryName = categoryName;
     }
 
-    // private void setAmountInCart(Integer amountInCart) {
-    //     this.amountInCart = amountInCart;
-    //}
+    public void setAmountInCart(Integer amountInCart) { this.amountInCart = amountInCart; }
 
     private void setAmountInStock(Integer amountStock) {
         this.amountInStock = amountStock;
     }
+
+
     // ----- GETTERS ----- //
 
     public String getName() {
@@ -81,7 +86,7 @@ public class Product extends CompProduct{
         return categoryName;
     }
 
-    // public Integer getAmountInCart() {
-    //     return amountInCart;
-   // }
+    public Integer getPrice() { return price; }
+
+    public Integer getAmountInCart() { return amountInCart;}
 }

@@ -1,7 +1,10 @@
 package User;
 
+import Products.CategoryName;
 import Products.Product;
 import FarmaStore.FarmaStore;
+
+import java.util.Scanner;
 
 public class Administrator extends User{
     private String name;
@@ -11,8 +14,31 @@ public class Administrator extends User{
 
     public void addProduct(){
         Product newProduct = new Product();
-        //todo recibir por pantalla todos los atributos del producto
-        //newProduct.createProduct(String nameP, Integer amountInStock, Integer price, String details, Integer minimumNeeded, CategoryName catName);
+
+        Scanner entradaEscaner = new Scanner (System.in);
+
+        String nameP;
+        Integer amountInStock;
+        Integer price;
+        String details;
+        Integer minimumNeeded;
+        CategoryName catName;
+
+        System.out.println ("Por favor introduzca el nombre del producto");
+        nameP = entradaEscaner.nextLine();
+        System.out.println ("Por favor introduzca la  cantidad en stock del producto");
+        amountInStock = entradaEscaner.nextInt();
+        System.out.println ("Por favor introduzca el precio del producto");
+        price = entradaEscaner.nextInt();
+        System.out.println ("Por favor introduzca los detalles del producto");
+        details = entradaEscaner.nextLine();
+        System.out.println ("Por favor introduzca la cantidad minima necesaria del producto");
+        minimumNeeded = entradaEscaner.nextInt();
+        System.out.println ("Por favor introduzca la categoria  del producto");
+        //catName = entradaEscaner.nextCategoryName();
+        //no se como hacer con categoryname
+
+        newProduct.createProduct(nameP, amountInStock, price,details,minimumNeeded/*, catName*/);
         store.addProduct(newProduct);
     }
 
