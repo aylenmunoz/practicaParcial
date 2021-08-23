@@ -1,7 +1,18 @@
 package Products;
 
-public class State extends Product{
+import User.Administrator;
 
-    public void replenishStock(){}
+public abstract class State{
+
+    Product product;
+
+    State(Product product){
+        this.product = product;
+    }
+
+    public void replenishStock(Product product){}
+
+
 }
+
 

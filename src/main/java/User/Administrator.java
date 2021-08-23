@@ -74,11 +74,8 @@ public class Administrator extends User{
         //TODO eliminar de DataBase
     }
 
-    public void createPromotion(){
-
-    }
-
-    public void replenishStock(Product product, Integer amount){
+      public void replenishStock(Product product){
+        Integer amount = product.amountNeeded();
         product.replenishStock(amount);
     }
 

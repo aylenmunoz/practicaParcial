@@ -11,10 +11,6 @@ public class Product extends CompProduct{
     private CategoryName categoryName;
     private Integer amountInCart;
 
-    public void setStateStock(State stateStock) {
-        this.stateStock = stateStock;
-    }
-
     public void replenishStock(Integer amount) {
         setAmountInStock(amount);
         super.setState(this);
@@ -28,8 +24,10 @@ public class Product extends CompProduct{
         this.setMinimumNeeded(minimumNeeded);
         this.setCategoryName(enumCatName);
         setState(this);
+    }
 
-
+    public Integer amountNeeded(){
+        return this.minimumNeeded - this.amountInStock;
     }
     // ----- SETTERS ----- //
 
@@ -59,6 +57,17 @@ public class Product extends CompProduct{
         this.amountInStock = amountStock;
     }
 
+    public void setTengoSuficiente(boolean tengoSuficiente) {
+        if(amountInStock > minimumNeeded){
+            tengoSuficiente = true;
+        }else{
+            tengoSuficiente = false;
+        }
+    }
+
+    public void setStateStock(State stateStock) {
+        this.setState(this);
+    }
 
     // ----- GETTERS ----- //
 

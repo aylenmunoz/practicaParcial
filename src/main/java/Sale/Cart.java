@@ -3,35 +3,31 @@ package Sale;
 import Products.Product;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cart {
 
-    private List<Product> products;
+    private List<Product> productsInCart;
     private PaymentMethod paymentMethod;
     private Integer totalAmount;
 
     public void addToCart(Product product){
-        products.add(product);
+        productsInCart.add(product);
     }
 
     public void removeFromCart(Product product){
-        products.remove(product);
-    }
-
-    public void deleteProduct(){
-        //TODO
+        productsInCart.remove(product);
     }
 
     public void charge(Integer totalAmount){
         //TODO
+        //TODO llamar a setSate cada vez q se compra el producto.
     }
 
 
 
     //setters
     public void setTotalAmount(Integer totalAmount) {
-        this.totalAmount = products.stream().mapToInt(p -> p.getPrice()).sum();
+        this.totalAmount = productsInCart.stream().mapToInt(p -> p.getPrice()).sum();
     }
 }
 
