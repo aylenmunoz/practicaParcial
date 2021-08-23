@@ -4,6 +4,7 @@ import Products.Product;
 import com.twilio.rest.api.v2010.account.call.Payment;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cart {
 
@@ -26,11 +27,15 @@ public class Cart {
         //TODO llamar a setSate cada vez q se compra el producto.
     }
 
+    //esta privado por algo?
     private void updateAmountsInProds() {
-        Integer amountInCart = 9; //TODO HACER ESO
-        productsInCart.forEach(product -> product.updateAmount(amountInCart));
+        productsInCart.forEach(product -> product.updateAmount(amountOfAProduct(product.getName())));
     }
 
+    public Integer amountOfAProduct(String nameProduct){
+        List<Product> list = productsInCart.stream().filter(product -> ( product.getName() == nameProduct)).collect(Collectors.toList());
+        return list.size();
+    }
 
     //setters
     public void setTotalAmount(Integer totalAmount) {
