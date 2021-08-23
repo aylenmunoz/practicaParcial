@@ -61,5 +61,15 @@ public class FarmaStore {
     public static List<Product> getProducts() {
         return products;
     }
+
+    public boolean userExists(String pass) {
+        User user = this.findUserWith(pass);
+        return user != null;
+    }
+    public User findUserWith(String password){
+        List<User> lUserWithPass = (List<User>) users.stream().filter(u -> u.getPassword() == password);
+        User userWithPass = lUserWithPass.get(0);
+        return userWithPass;
+    }
 }
 

@@ -18,6 +18,7 @@ public class main {
                         "1.Registrarse\n " +
                         "2.Iniciar Sesion\n" +
                         "3.Mirar nuestros productos\n ");
+                //TODO hacer la opcion de comprar como cliente, o entrar al portal administrador
                 operacion = mainscan.nextInt();
                 switch (operacion){
                     case 0:{
@@ -55,8 +56,21 @@ public class main {
                 pass = registerScan.nextLine();
                 user.newUser(mail, pass);
                 System.out.println("Se creo su cuenta con exito");
+                //TODO data base
             }
             public void logIn(){
+                String mail;
+                String pass;
+                Scanner registerScan = new Scanner(System.in);
+                System.out.println("Ingresa su email");
+                mail = registerScan.nextLine();
+                System.out.println("Ingrese la contrasenia para su cuenta");
+                pass = registerScan.nextLine();
+                if(store.userExists(pass)){
+                    System.out.println("Ingresaste Correctamente");
+                }else{
+                    System.out.println("Datos incorrectos");
+                }
 
             }
     }

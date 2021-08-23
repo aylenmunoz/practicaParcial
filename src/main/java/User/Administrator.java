@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Administrator extends User{
     private String name;
     private static Administrator instancia;
-    static FarmaStore store = FarmaStore.getInstance();
+
 
 
     public void addProduct(){
@@ -44,6 +44,7 @@ public class Administrator extends User{
         Category.updateCategory(enumCat);
     }
     //TODO esto se llama del main!!
+
     public void setCategoryOrder(){
         Scanner entradaEscaner = new Scanner (System.in);
         System.out.println ("Introduzca 1 para ordenar las categorias, 0 para salir");

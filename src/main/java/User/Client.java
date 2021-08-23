@@ -40,7 +40,7 @@ public class Client extends User {
     }
 
     public void deleteAccount(){
-
+        store.removeClient(this);
     }
 
     public void setPaymentMethod(MethodStrategy paymentMethod) {
