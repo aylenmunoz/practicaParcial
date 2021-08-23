@@ -26,6 +26,10 @@ public class Product extends CompProduct{
         setState(this);
     }
 
+    public void updateAmount(Integer amount){
+        amountInStock -= amount;
+    }
+
     public Integer amountNeeded(){
         return this.minimumNeeded - this.amountInStock;
     }
