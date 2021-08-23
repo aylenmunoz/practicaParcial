@@ -18,25 +18,18 @@ public class Administrator extends User{
 
         Scanner entradaEscaner = new Scanner (System.in);
 
-        String nameP;
-        Integer amountInStock;
-        Integer price;
-        String details;
-        Integer minimumNeeded;
-        String catName;
-
         System.out.println ("Por favor introduzca el nombre del producto");
-        nameP = entradaEscaner.nextLine();
+        String nameP = entradaEscaner.nextLine();
         System.out.println ("Por favor introduzca la  cantidad en stock del producto");
-        amountInStock = entradaEscaner.nextInt();
+        Integer amountInStock = entradaEscaner.nextInt();
         System.out.println ("Por favor introduzca el precio del producto");
-        price = entradaEscaner.nextInt();
+        Integer price = entradaEscaner.nextInt();
         System.out.println ("Por favor introduzca los detalles del producto");
-        details = entradaEscaner.nextLine();
+        String details = entradaEscaner.nextLine();
         System.out.println ("Por favor introduzca la cantidad minima necesaria del producto");
-        minimumNeeded = entradaEscaner.nextInt();
+        Integer minimumNeeded = entradaEscaner.nextInt();
         System.out.println ("Por favor introduzca la categoria  del producto");
-        catName = entradaEscaner.nextLine();
+        String catName = entradaEscaner.nextLine();
         CategoryName enumCat = CategoryName.valueOf(catName);
 
         newProduct.createProduct(nameP, amountInStock, price,details,minimumNeeded, enumCat);

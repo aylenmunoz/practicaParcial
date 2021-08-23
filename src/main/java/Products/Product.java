@@ -1,5 +1,9 @@
 package Products;
 
+import Sale.Cart;
+
+import java.util.List;
+
 public class Product extends CompProduct{
 
     private String name;
@@ -9,7 +13,6 @@ public class Product extends CompProduct{
     private State stateStock;
     private Integer minimumNeeded;
     private CategoryName categoryName;
-    private Integer amountInCart;
 
     public void replenishStock(Integer amount) {
         setAmountInStock(amount);
@@ -24,6 +27,10 @@ public class Product extends CompProduct{
         this.setMinimumNeeded(minimumNeeded);
         this.setCategoryName(enumCatName);
         setState(this);
+    }
+
+    public Integer timesImInACart(Cart carrito){
+        return carrito.amountOfAProduct(this);
     }
 
     public void updateAmount(Integer amount){
@@ -55,8 +62,6 @@ public class Product extends CompProduct{
     private void setCategoryName(CategoryName categoryName) {
         this.categoryName = categoryName;
     }
-
-    public void setAmountInCart(Integer amountInCart) { this.amountInCart = amountInCart; }
 
     private void setAmountInStock(Integer amountStock) {
         this.amountInStock = amountStock;
@@ -102,5 +107,4 @@ public class Product extends CompProduct{
 
     public Integer getPrice() { return price; }
 
-    public Integer getAmountInCart() { return amountInCart;}
 }

@@ -2,7 +2,7 @@ package Sale;
 
 import FarmaStore.FarmaStore;
 import Products.Product;
-import Sale.ProductInOrder;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,26 +23,12 @@ public class Cart {
 
     public void charge(PaymentMethod method){
         Order newOrder = new Order();
-        Integer amountOfOrders = store.getAllOrders().size();
-        Integer orderNumber = amountOfOrders + 1;
-        List<ProductInOrder> productsInOrder = productsInCart.stream().map(p -> p.)
-        newOrder.createOrder(orderNumber, productsInCart, this);
+        newOrder.createOrder(this);
         MethodStrategy strategy = method.selectMethod(method);
         strategy.charge(totalPrice, newOrder);
         this.updateStockOfProds();
     }
 
-    public List<ProductInOrder> prodInCartToProdInOrder(){
-        List<ProductInOrder> productsInOrder = null;
-        for(Integer i = 0; i < productsInCart.size() ; i ++){
-            Product product = productsInCart.get(i);
-            ProductInOrder newPiO = new ProductInOrder();
-            newPiO.createPinO(product, this);
-            productsInOrder.add(newPiO);
-        }
-        return productsInOrder;
-
-    }
 
     public void updateStockOfProds() {
         productsInCart.forEach(product -> product.updateAmount(amountOfAProduct(product)));
