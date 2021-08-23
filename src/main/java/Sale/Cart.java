@@ -2,15 +2,14 @@ package Sale;
 
 import FarmaStore.FarmaStore;
 import Products.Product;
-import com.twilio.rest.api.v2010.account.call.Payment;
-
+import Sale.ProductInOrder;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Cart {
 
     private List<Product> productsInCart;
-    private Integer totalAmount;
+    private Integer totalPrice;
     private MethodStrategy payMethod;
     static FarmaStore store = FarmaStore.getInstance();
 
@@ -26,19 +25,31 @@ public class Cart {
         Order newOrder = new Order();
         Integer amountOfOrders = store.getAllOrders().size();
         Integer orderNumber = amountOfOrders + 1;
-
-        newOrder.createOrder(orderNumber, productsInCart);
+        List<ProductInOrder> productsInOrder = productsInCart.stream().map(p -> p.)
+        newOrder.createOrder(orderNumber, productsInCart, this);
         MethodStrategy strategy = method.selectMethod(method);
-        strategy.charge(totalAmount, newOrder);
-        this.updateAmountsInProds();
+        strategy.charge(totalPrice, newOrder);
+        this.updateStockOfProds();
     }
 
-    private void updateAmountsInProds() {
-        productsInCart.forEach(product -> product.updateAmount(amountOfAProduct(product.getName())));
+    public List<ProductInOrder> prodInCartToProdInOrder(){
+        List<ProductInOrder> productsInOrder = null;
+        for(Integer i = 0; i < productsInCart.size() ; i ++){
+            Product product = productsInCart.get(i);
+            ProductInOrder newPiO = new ProductInOrder();
+            newPiO.createPinO(product, this);
+            productsInOrder.add(newPiO);
+        }
+        return productsInOrder;
+
     }
 
-    private Integer amountOfAProduct(String nameProduct){
-        List<Product> list = productsInCart.stream().filter(product -> ( product.getName() == nameProduct)).collect(Collectors.toList());
+    public void updateStockOfProds() {
+        productsInCart.forEach(product -> product.updateAmount(amountOfAProduct(product)));
+    }
+
+    public Integer amountOfAProduct(Product product){
+        List<Product> list = productsInCart.stream().filter(p -> ( p == product)).collect(Collectors.toList());
         return list.size();
     }
 
@@ -47,8 +58,12 @@ public class Cart {
     }
 
     //setters
-    public void setTotalAmount(Integer totalAmount) {
-        this.totalAmount = productsInCart.stream().mapToInt(p -> p.getPrice()).sum();
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = productsInCart.stream().mapToInt(p -> p.getPrice()).sum();
+    }
+    //getters
+    public Integer getTotalPrice(){
+        return totalPrice;
     }
 }
 
