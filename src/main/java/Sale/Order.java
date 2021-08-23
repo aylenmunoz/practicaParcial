@@ -42,6 +42,9 @@ public class Order {
             System.out.println ("La cantidad de veces que llevo el producto es: " + amountInCart + "\n");
 
         }
+
+        System.out.println ("El total de la compra es: " + totalAmount + "\n");
+
     }
     // ------ GETTERS ------ //
     public Integer getOrderNumber() {
