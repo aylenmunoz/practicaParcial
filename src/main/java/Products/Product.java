@@ -28,6 +28,7 @@ public class Product extends CompProduct{
 
     public void updateAmount(Integer amount){
         amountInStock -= amount;
+        this.setStateStock();
     }
 
     public Integer amountNeeded(){
@@ -69,7 +70,7 @@ public class Product extends CompProduct{
         }
     }
 
-    public void setStateStock(State stateStock) {
+    public void setStateStock() {
         this.setState(this);
     }
 

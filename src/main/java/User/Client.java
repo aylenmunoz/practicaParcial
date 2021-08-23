@@ -3,6 +3,7 @@ package User;
 import Products.Product;
 import Sale.Cart;
 import Sale.MethodStrategy;
+import Sale.Order;
 import Sale.PaymentMethod;
 
 import java.util.List;
@@ -12,14 +13,18 @@ public class Client extends User {
 
     private String name;
     private String surname;
-    private List<Cart> previousPurchases;
+    private List<Order> previousPurchases;
     private Cart cart;
     private String billingAddress;
     private String deliveryAddress;
     private PaymentMethod paymentMethod;
 
     public void buy(){
-        cart.charge(this.paymentMethod);
+        if(cart.getProductsInCart().size() == 0){
+            System.out.println("No puede iniciar la compra de un carrito vacio");
+        }else{
+            cart.charge(this.paymentMethod);
+        }
     }
 
     public void addToCart(Product product){
@@ -27,6 +32,9 @@ public class Client extends User {
 
     }
 
+    public void addOrder(Order order){
+        previousPurchases.add(order);
+    }
     public void removeFromCart(Product product){
         cart.removeFromCart(product);
     }

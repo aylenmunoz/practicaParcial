@@ -1,5 +1,6 @@
 package Sale;
 
+import FarmaStore.FarmaStore;
 import Products.Product;
 import com.twilio.rest.api.v2010.account.call.Payment;
 
@@ -11,6 +12,7 @@ public class Cart {
     private List<Product> productsInCart;
     private Integer totalAmount;
     private MethodStrategy payMethod;
+    static FarmaStore store = FarmaStore.getInstance();
 
     public void addToCart(Product product){
         productsInCart.add(product);
@@ -21,20 +23,27 @@ public class Cart {
     }
 
     public void charge(PaymentMethod method){
+        Order newOrder = new Order();
+        Integer amountOfOrders = store.getAllOrders().size();
+        Integer orderNumber = amountOfOrders + 1;
+
+        newOrder.createOrder(orderNumber, productsInCart);
         MethodStrategy strategy = method.selectMethod(method);
-        strategy.charge(totalAmount);
+        strategy.charge(totalAmount, newOrder);
         this.updateAmountsInProds();
-        //TODO llamar a setSate cada vez q se compra el producto.
     }
 
-    //esta privado por algo?
     private void updateAmountsInProds() {
         productsInCart.forEach(product -> product.updateAmount(amountOfAProduct(product.getName())));
     }
 
-    public Integer amountOfAProduct(String nameProduct){
+    private Integer amountOfAProduct(String nameProduct){
         List<Product> list = productsInCart.stream().filter(product -> ( product.getName() == nameProduct)).collect(Collectors.toList());
         return list.size();
+    }
+
+    public List<Product> getProductsInCart() {
+        return productsInCart;
     }
 
     //setters

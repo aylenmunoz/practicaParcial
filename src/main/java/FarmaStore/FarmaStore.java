@@ -2,6 +2,7 @@ package FarmaStore;
 
 import Products.CategoryName;
 import Products.CompProduct;
+import Sale.Order;
 import User.Administrator;
 import User.Client;
 import Products.Product;
@@ -13,7 +14,7 @@ public class FarmaStore {
 
     private List<User> users;
     private static List<Product> products;
-    private List<Client> subscribers;
+     private List<Order> allOrders;
     private Administrator admin = Administrator.obtenerInstancia();
     private static FarmaStore instance;
 
@@ -25,6 +26,9 @@ public class FarmaStore {
         return instance;
     }
 
+    public void addOrder(Order order){
+        allOrders.add(order);
+    }
     public static List<CompProduct> findProductsWithCategory(CategoryName category) {
         List<CompProduct> prodsWithCatName = (List<CompProduct>) products.stream().filter(product -> product.getCategoryName() == category);
         return prodsWithCatName;
@@ -49,4 +53,13 @@ public class FarmaStore {
     public void removeClient(User user) {
         users.remove(user);
     }
+
+    public List<Order> getAllOrders() {
+        return allOrders;
+    }
+
+    public static List<Product> getProducts() {
+        return products;
+    }
 }
+
