@@ -6,7 +6,7 @@ import FarmaStore.FarmaStore;
 public class Category extends CompProduct {
 
     private List<CompProduct> productsInCategory;
-    private CategoryName catname;
+    private CategoryName catName;
 
     public static void updateCategory(CategoryName category){
         List<CompProduct> prodsWithCat = FarmaStore.findProductsWithCategory(category);
@@ -26,7 +26,7 @@ public class Category extends CompProduct {
         supraCat.productsInCategory.add(subCat);
     }
 
-    public void setCatname(CategoryName catname) {
-        this.catname = catname;
+    public void setCatName(CategoryName catName) {
+        this.catName = catName;
     }
 }

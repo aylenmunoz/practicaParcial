@@ -15,7 +15,7 @@ public class FarmaStore {
 
     private List<User> users;
     private static List<Product> products;
-     private List<Orden> allOrdens;
+    private List<Orden> allOrdens;
     private Administrator admin = Administrator.obtenerInstancia();
     private static FarmaStore instance;
 
@@ -30,6 +30,7 @@ public class FarmaStore {
     public void addOrder(Orden orden){
         allOrdens.add(orden);
     }
+
     public static List<CompProduct> findProductsWithCategory(CategoryName category) {
         List<CompProduct> prodsWithCatName = (List<CompProduct>) products.stream().filter(product -> product.getCategoryName() == category);
         return prodsWithCatName;
@@ -65,9 +66,9 @@ public class FarmaStore {
         User user = this.findUserWith(pass);
         return user != null;
     }
-    public User findUserWith(String password){
-        List<User> lUserWithPass = (List<User>) users.stream().filter(u -> u.getPassword() == password);
-        User userWithPass = lUserWithPass.get(0);
+    public Client findUserWith(String password){
+        List<Client> lUserWithPass = (List<Client>) users.stream().filter(u -> u.getPassword() == password);
+        Client userWithPass = lUserWithPass.get(0);
         return userWithPass;
     }
     public Client register() {
@@ -95,7 +96,7 @@ public class FarmaStore {
         String pass = registerScan.nextLine();
         if(store.userExists(pass)){ //todo buscar en DataBase
             System.out.println("Ingresaste Correctamente");
-            Client client = null; //todo agarrar de DB
+            Client client = findUserWith(pass);
             return client;
         }else{
             System.out.println("Datos incorrectos");

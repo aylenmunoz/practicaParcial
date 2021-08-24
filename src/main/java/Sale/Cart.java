@@ -13,7 +13,7 @@ public class Cart {
 
     private List<Product> productsInCart;
     private Integer totalPrice;
-    private MethodStrategy payMethod;
+    private PaymentMethod payMethod;
     static FarmaStore store = FarmaStore.getInstance();
 
     public void addToCart(Product product){
@@ -48,7 +48,7 @@ public class Cart {
 
     //setters
     public void setTotalPrice(Integer totalPrice) {
-        this.totalPrice = productsInCart.stream().mapToInt(p -> p.getPrice()).sum();
+        this.totalPrice = productsInCart.stream().mapToInt(Product::getPrice).sum();
     }
     //getters
     public Integer getTotalPrice(){

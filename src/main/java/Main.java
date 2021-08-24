@@ -34,38 +34,39 @@ public class Main {
                     break;
             }
             if(op != 0) {
-                Integer operacion = -1;
+                int operacion = -1;
                 while (operacion != 0) {
                     Scanner mainscan = new Scanner(System.in);
                     System.out.println("Ingresa un numero segun la operacion que desea realizar \n " +
                             "0. Terminar \n " +
                             "1.Mirar nuestros productos\n " +
                             "2.Agregar producto al carrito");
-                    //TODO hacer la opcion de comprar como cliente, o entrar al portal administrador
                     operacion = mainscan.nextInt();
                     switch (operacion) {
                         case 0:
                             System.out.println("Termino con exito");
                             break;
                         case 1:
-                            for (int i = 0; i < allProducts.size(); i++) {
-                                System.out.println(allProducts.get(i).getName());
+                            for (Product allProduct : allProducts) {
+                                System.out.println(allProduct.getName());
                             }
                             break;
                         case 2:
                             Scanner compraScan = new Scanner(System.in);
                             System.out.println("Cuantos productos desea comprar?");
-                            Integer cant = compraScan.nextInt();
-                            for (Integer i = 0; i < cant; i++) {
+                            int cant = compraScan.nextInt();
+                            for (int i = 0; i < cant; i++) {
                                 System.out.println("Ingresar el nombre del producto");
                                 String nombre = compraScan.nextLine();
                                 List<Product> lProd = (List<Product>) allProducts.stream().filter(p -> p.getName() == nombre);
                                 Product prod = lProd.get(0);
+                                assert client != null;
                                 client.addToCart(prod);
                             }
                             System.out.println("Se agregaron los productos al carrito, si desea comprar ingrese 1, sino 2");
-                            Integer desicion = compraScan.nextInt();
+                            int desicion = compraScan.nextInt();
                             if (desicion == 1) {
+                                assert client != null;
                                 client.buy();
                             } else {
                                 System.out.println("Se guardo el carrito para mas tarde");

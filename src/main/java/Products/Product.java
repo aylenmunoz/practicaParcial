@@ -41,6 +41,8 @@ public class Product extends CompProduct{
     public Integer amountNeeded(){
         return this.minimumNeeded - this.amountInStock;
     }
+
+
     // ----- SETTERS ----- //
 
     private void setName(String name) {
