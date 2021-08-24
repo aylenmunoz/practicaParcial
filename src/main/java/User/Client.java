@@ -46,7 +46,7 @@ public class Client extends User {
     }
 
     public void deleteAccount(){
-        store.removeClient(this);
+        store.removeClient(this.getEmail());
     }
 
     public void setPaymentMethod(MethodStrategy paymentMethod) {

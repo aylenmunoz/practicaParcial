@@ -1,5 +1,6 @@
 import FarmaStore.FarmaStore;
 import Products.Product;
+import User.Administrator;
 import User.Client;
 
 
@@ -20,7 +21,8 @@ public class Main {
             System.out.println("Ingresa un numero segun la operacion que desea realizar \n " +
                 "0. Terminar \n " +
                 "1.Registrarse\n " +
-                "2.Iniciar Sesion\n");
+                "2.Iniciar Sesion\n" +
+                "3.Iniciar Sesion como Administrador\n");
                 op= scanLog.nextInt();
             switch(op){
                 case 0:
@@ -33,8 +35,13 @@ public class Main {
                 case 2:
                     client = store.logIn();
                     break;
+                case 3:
+                    if(store.logInAsAnAdminstrator()){
+                        menuAdministrador();
+                        break;
+                    }
             }
-            if(op != 0) {
+            if(op != 0 && op !=3) {
                 int operacion = -1;
                 while (operacion != 0) {
                     Scanner mainscan = new Scanner(System.in);
@@ -81,5 +88,46 @@ public class Main {
             }
             }
 
+    private static void menuAdministrador() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Administrator admin = Administrator.obtenerInstancia();
+        int operation = -1;
+        while (operation != 0) {
+            Scanner mainscan = new Scanner(System.in);
+            System.out.println("Ingresa un numero segun la operacion que desea realizar \n " +
+                    "0.Terminar \n " +
+                    "1.Agregar producto a la tienda\n " +
+                    "2.Ordenar las categorias de los productos\n" +
+                    "3.Eliminar producto\n"+
+                    "4.Eliminar usuario\n" +
+                    "5.Reponer stock\n");
+            operation = mainscan.nextInt();
+            switch (operation) {
+                case 0:
+                    System.out.println("Termino con exito");
+                    break;
+                case 1:
+                    admin.addProduct();
+                    break;
+                case 2:
+                    admin.setCategoryOrder();
+                    break;
+                case 3:
+                    admin.deleteProduct();
+                    break;
+                case 4:
+                    System.out.println("Ingresar el mail del usuario a eliminar \n ");
+                    String name = mainscan.nextLine();
+                    admin.deleteUser(name);
+                    break;
+                case 5:
+                    System.out.println("Ingresar el nombre del producto a eliminar \n ");
+                    String nameP = mainscan.nextLine();
+                    admin.replenishStock(nameP);
+                    break;
+            }
+
+
     }
+
+}}
 

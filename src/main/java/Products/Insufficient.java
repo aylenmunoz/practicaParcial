@@ -14,6 +14,6 @@ public class Insufficient extends State{
 
     @Override
     public void replenishStock(Product product){
-        admin.replenishStock(product);
+        admin.replenishStock(product.getName());
     }
 }

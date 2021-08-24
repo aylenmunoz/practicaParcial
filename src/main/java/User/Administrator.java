@@ -6,7 +6,9 @@ import Products.Product;
 import FarmaStore.FarmaStore;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Administrator extends User{
     private String name;
@@ -60,18 +62,22 @@ public class Administrator extends User{
         System.out.println ("Se Salio del menu de ordenar Categorias");
     }
 
-    public void deleteProduct(Product product){
-        store.deleteProductFromStore(product);
+    public void deleteProduct(){
+        Scanner mainscan = new Scanner(System.in);
+        System.out.println("Ingresar el nombre del producto a eliminar \n ");
+        String prod = mainscan.nextLine();
+        store.deleteProductFromStore(prod);
     }
 
-    public void deleteUser(User user){
-        store.removeClient(user);
+    public void deleteUser(String mail){
+        store.removeClient(mail);
         //TODO eliminar de DataBase
     }
 
-      public void replenishStock(Product product){
-        Integer amount = product.amountNeeded();
-        product.replenishStock(amount);
+      public void replenishStock(String name){
+          Product p = store.findProductByName(name);
+          Integer amount = p.amountNeeded();
+          Product.replenishStock(amount);
     }
 
     public static Administrator obtenerInstancia() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
