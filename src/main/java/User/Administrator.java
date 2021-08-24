@@ -1,5 +1,6 @@
 package User;
 
+import Conections.ProductDAO;
 import Products.Category;
 import Products.CategoryName;
 import Products.Product;
@@ -16,7 +17,7 @@ public class Administrator extends User{
 
 
 
-    public void addProduct(){
+    public void addProduct() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Product newProduct = new Product();
 
         Scanner entradaEscaner = new Scanner (System.in);
@@ -36,10 +37,10 @@ public class Administrator extends User{
         CategoryName enumCat = CategoryName.valueOf(catName);
 
         newProduct.createProduct(nameP, amountInStock, price,details,minimumNeeded, enumCat);
-        store.addProductToStore(newProduct);
+        ProductDAO.createProduct(newProduct);
+        store.addProductToStore(newProduct); //No lo sacamos ya que no desarrollamos la funcion de getProductsFrom DB y elegimos mantener esta lista
         Category.updateCategory(enumCat);
     }
-    //TODO esto se llama del main!!
 
     public void setCategoryOrder(){
         Scanner entradaEscaner = new Scanner (System.in);
@@ -66,18 +67,18 @@ public class Administrator extends User{
         Scanner mainscan = new Scanner(System.in);
         System.out.println("Ingresar el nombre del producto a eliminar \n ");
         String prod = mainscan.nextLine();
+        ProductDAO.deleteProduct(prod);
         store.deleteProductFromStore(prod);
     }
 
     public void deleteUser(String mail){
         store.removeClient(mail);
-        //TODO eliminar de DataBase
     }
 
       public void replenishStock(String name){
           Product p = store.findProductByName(name);
           Integer amount = p.amountNeeded();
-          Product.replenishStock(amount);
+          p.replenishStock(amount);
     }
 
     public static Administrator obtenerInstancia() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

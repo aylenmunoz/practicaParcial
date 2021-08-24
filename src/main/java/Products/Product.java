@@ -14,7 +14,7 @@ public class Product extends CompProduct{
     private Integer minimumNeeded;
     private CategoryName categoryName;
 
-    public static void replenishStock(Integer amount) {
+    public void replenishStock(Integer amount) {
         setAmountInStock(amount);
         super.setState(this);
     }

@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class FarmaStore {
 
-    private List<User> users;
     private static List<Product> products;
     private List<Orden> allOrdens;
     private Administrator admin = Administrator.obtenerInstancia();
@@ -49,7 +48,6 @@ public class FarmaStore {
     public void deleteProductFromStore(String name){
        Product pADelete = this.findProductByName(name);
        products.remove(pADelete);
-        //todo sacarlo de DB
     }
 
     public void addClient(User client) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -57,8 +55,7 @@ public class FarmaStore {
     }
 
     public void removeClient(String mail) {
-        User uADelete = this.findUserWithMail(mail);
-        users.remove(uADelete);
+        UserDAO.deleteUser(mail);
     }
 
     public List<Orden> getAllOrders() {
@@ -74,7 +71,8 @@ public class FarmaStore {
         return user != null;
     }
     public Client findUserWithMail(String mail){
-        List<Client> lUserWithMail = (List<Client>) users.stream().filter(u -> u.getEmail() == mail);
+        List<User> usuarios = UserDAO.selectUsers();
+        List<Client> lUserWithMail = (List<Client>) usuarios.stream().filter(u -> u.getEmail() == mail);
         Client userWithMail = lUserWithMail.get(0);
         return userWithMail;
     }
@@ -83,11 +81,7 @@ public class FarmaStore {
         List <Product> p = products.stream().filter(pr->pr.getName() == name).collect(Collectors.toList());
         Product pr = p.get(0);
         return pr;
-
     }
-
-
-
 
     public Client register() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Client client = new Client();
@@ -107,7 +101,6 @@ public class FarmaStore {
 
             this.addClient(client);
             return client;
-            //TODO data base
         }
     }
 
@@ -118,7 +111,7 @@ public class FarmaStore {
         String mail = registerScan.nextLine();
         System.out.println("Ingrese la contrasenia para su cuenta");
         String pass = registerScan.nextLine();
-        if(store.userExists(pass)){ //todo buscar en DataBase
+        if(UserDAO.getUserByMail(mail)){
             Client client = findUserWithMail(mail);
             if (client.getPassword() == pass) {
                 System.out.println("Ingresaste Correctamente");
@@ -131,7 +124,6 @@ public class FarmaStore {
             System.out.println("El email no pertenece a una cuenta registrada.");
             return null;
         }
-
     }
 
     public boolean logInAsAnAdminstrator() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -152,7 +144,8 @@ public class FarmaStore {
     }
 
     private boolean yaExisteUsuarioConEsteMail(String mail) {
-        List<String> lEmails = users.stream().map(u -> u.getEmail()).collect(Collectors.toList());
+        List<User> usuarios = UserDAO.selectUsers();
+        List<String> lEmails = usuarios.stream().map(u -> u.getEmail()).collect(Collectors.toList());
         return lEmails.contains(mail);
     }
 
