@@ -6,6 +6,7 @@ import User.Client;
 import User.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,21 @@ public class Cart {
     private List<Product> productsInCart;
     private Integer totalPrice;
     private PaymentMethod payMethod;
-    static FarmaStore store = FarmaStore.getInstance();
+    static FarmaStore store;
+
+    static {
+        try {
+            store = FarmaStore.getInstance();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addToCart(Product product){
         productsInCart.add(product);

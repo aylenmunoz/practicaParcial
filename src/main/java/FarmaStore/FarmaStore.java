@@ -1,5 +1,6 @@
 package FarmaStore;
 
+import Conections.UserDAO;
 import Products.CategoryName;
 import Products.CompProduct;
 import Sale.Orden;
@@ -8,6 +9,7 @@ import Products.Product;
 import User.User;
 import User.Client;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,8 +21,11 @@ public class FarmaStore {
     private Administrator admin = Administrator.obtenerInstancia();
     private static FarmaStore instance;
 
+    public FarmaStore() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    }
 
-    public static FarmaStore getInstance(){
+
+    public static FarmaStore getInstance() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if (instance == null) {
             instance = new FarmaStore();
         }
@@ -45,9 +50,8 @@ public class FarmaStore {
         //todo sacarlo de DB
     }
 
-    public void addClient(User client){
-        users.add(client);
-        //todo agregarlo en DB
+    public void addClient(User client) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        UserDAO.registerUser(client);
     }
 
     public void removeClient(User user) {
@@ -71,7 +75,7 @@ public class FarmaStore {
         Client userWithPass = lUserWithPass.get(0);
         return userWithPass;
     }
-    public Client register() {
+    public Client register() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Client client = new Client();
         String mail;
         String pass;
@@ -87,7 +91,7 @@ public class FarmaStore {
         return client;
         //TODO data base
     }
-    public Client logIn(){
+    public Client logIn() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         FarmaStore store = FarmaStore.getInstance();
         Scanner registerScan = new Scanner(System.in);
         System.out.println("Ingresa su email");

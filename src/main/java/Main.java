@@ -4,13 +4,14 @@ import User.Client;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws ParseException, IOException {
+    public static void main(String[] args) throws ParseException, IOException, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         FarmaStore store = FarmaStore.getInstance();
         List<Product> allProducts = store.getProducts();
         Client client = null;

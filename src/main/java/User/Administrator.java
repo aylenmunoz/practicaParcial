@@ -5,6 +5,7 @@ import Products.CategoryName;
 import Products.Product;
 import FarmaStore.FarmaStore;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Administrator extends User{
@@ -73,7 +74,7 @@ public class Administrator extends User{
         product.replenishStock(amount);
     }
 
-    public static Administrator obtenerInstancia(){
+    public static Administrator obtenerInstancia() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if (instancia == null) {
             instancia = new Administrator();
             store.addClient(instancia);
