@@ -22,14 +22,8 @@ public class Orden {
     static {
         try {
             store = FarmaStore.getInstance();
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
     }
 
@@ -42,6 +36,7 @@ public class Orden {
         this.setDate();
         this.setTotalPrice(carrito);
         store.addOrder(this);
+        //INSERT order en DB
     }
 
     public void showOrder(){

@@ -11,7 +11,8 @@ public class Category extends CompProduct {
     public static void updateCategory(CategoryName category){
         List<CompProduct> prodsWithCat = FarmaStore.findProductsWithCategory(category);
         Category categoriaConNombre = obtainCatFromList(category);
-        categoriaConNombre.productsInCategory = prodsWithCat; //la igualo sin un if xq es lo mismo
+        categoriaConNombre.productsInCategory = prodsWithCat;
+        //UDPDATE en DB
     }
 
     private static Category obtainCatFromList(CategoryName cat){

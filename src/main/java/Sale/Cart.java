@@ -20,27 +20,24 @@ public class Cart {
     static {
         try {
             store = FarmaStore.getInstance();
-        } catch (SQLException throwables) {
+        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
     }
 
     public void addToCart(Product product){
         productsInCart.add(product);
+        //Se deberia hacer un INSERT productxCart en db
     }
 
     public void removeFromCart(Product product){
         productsInCart.remove(product);
+        //DELETE productxCart productxCartid en db
     }
 
     public void charge(PaymentMethod method, User client) throws IOException {
         Orden newOrden = new Orden();
+        //INSERT orden en db
         newOrden.createOrder(this);
         MethodStrategy strategy = method.selectMethod(method);
         strategy.charge(newOrden, client);
@@ -50,6 +47,7 @@ public class Cart {
 
     public void updateStockOfProds() {
         productsInCart.forEach(product -> product.updateAmount(amountOfAProduct(product)));
+        //UPDATE product en DB
     }
 
     public Integer amountOfAProduct(Product product){

@@ -17,6 +17,7 @@ public class Product extends CompProduct{
     public void replenishStock(Integer amount) {
         setAmountInStock(amount);
         super.setState(this);
+        //UPDATE en DB tbn
     }
 
     public void createProduct(String nameP, Integer amountInStock, Integer price, String details, Integer minimumNeeded,CategoryName enumCatName){

@@ -4,7 +4,6 @@ import Conections.ProductDAO;
 import Products.Category;
 import Products.CategoryName;
 import Products.Product;
-import FarmaStore.FarmaStore;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -45,7 +44,7 @@ public class Administrator extends User{
     public void setCategoryOrder(){
         Scanner entradaEscaner = new Scanner (System.in);
         System.out.println ("Introduzca 1 para ordenar las categorias, 0 para salir");
-        Integer comando = entradaEscaner.nextInt();
+        int comando = entradaEscaner.nextInt();
         while(comando == 1) {
 
             System.out.println("Introduzca la Categoria Padre de la Lista de Categorias, en mayuscula y con '_' en lugar de espacio");
@@ -58,7 +57,8 @@ public class Administrator extends User{
 
             Category.putCategoryInSuperCategory(supraCat, subCat);
 
-            this.setCategoryOrder(); //es recursiva
+            System.out.println ("Introduzca 1 para seguir ordenando las categorias, o 0 para salir");
+           comando = entradaEscaner.nextInt();
         }
         System.out.println ("Se Salio del menu de ordenar Categorias");
     }

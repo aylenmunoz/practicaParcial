@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 public class FarmaStore {
 
-    private static List<Product> products;
-    private List<Orden> allOrdens;
+    private static List<Product> products;  //Esta informacion deberia obtenerse de la DB a traves de un SELECT product
+    private List<Orden> allOrdens;  //Esta informacion deberia obtenerse de la DB a traves de un SELECT order
     private Administrator admin = Administrator.obtenerInstancia();
     private static FarmaStore instance;
 
@@ -33,11 +33,13 @@ public class FarmaStore {
     }
 
     public void addOrder(Orden orden){
+        //deberia persistirse la orden en la base de datos con un INSERT orden
         allOrdens.add(orden);
     }
 
     public static List<CompProduct> findProductsWithCategory(CategoryName category) {
         List<CompProduct> prodsWithCatName = (List<CompProduct>) products.stream().filter(product -> product.getCategoryName() == category);
+        //Se deberia buscar en la base de datos con un SELECT FROM CompProduct where category category
         return prodsWithCatName;
     }
 
@@ -60,10 +62,12 @@ public class FarmaStore {
 
     public List<Orden> getAllOrders() {
         return allOrdens;
+        //Esta informacion deberia obtenerse de la DB a traves de un SELECT order
     }
 
     public static List<Product> getProducts() {
         return products;
+        //Esta informacion deberia obtenerse de la DB a traves de un SELECT product
     }
 
     public boolean userExists(String mail) {

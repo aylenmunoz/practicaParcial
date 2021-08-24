@@ -1,6 +1,7 @@
 package User;
 
 import Products.Product;
+import Products.Sufficient;
 import Sale.Cart;
 import Sale.MethodStrategy;
 import Sale.Orden;
@@ -34,8 +35,11 @@ public class Client extends User {
     }
 
     public void addToCart(Product product){
-        cart.addToCart(product);
-
+        if(product.getStateStock().toString() != "Sufficient"){
+            cart.addToCart(product);
+        }else{
+            System.out.println("No hay stock suficiente del producto");
+        }
     }
 
     public void addOrder(Orden orden){
