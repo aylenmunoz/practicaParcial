@@ -3,9 +3,10 @@ package User;
 import Products.Product;
 import Sale.Cart;
 import Sale.MethodStrategy;
-import Sale.Order;
+import Sale.Orden;
 import Sale.PaymentMethod;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,18 +14,23 @@ public class Client extends User {
 
     private String name;
     private String surname;
-    private List<Order> previousPurchases;
+    private List<Orden> previousPurchases;
     private Cart cart;
     private String billingAddress;
     private String deliveryAddress;
     private PaymentMethod paymentMethod;
 
-    public void buy(){
+    public void buy() throws IOException {
         if(cart.getProductsInCart().size() == 0){
             System.out.println("No puede iniciar la compra de un carrito vacio");
         }else{
-            cart.charge(this.paymentMethod);
+            cart.charge(this.paymentMethod, this);
         }
+    }
+
+    public void newClient(String mail, String pass){
+        this.setEmail(mail);
+        this.setPassword(pass);
     }
 
     public void addToCart(Product product){
@@ -32,8 +38,8 @@ public class Client extends User {
 
     }
 
-    public void addOrder(Order order){
-        previousPurchases.add(order);
+    public void addOrder(Orden orden){
+        previousPurchases.add(orden);
     }
     public void removeFromCart(Product product){
         cart.removeFromCart(product);

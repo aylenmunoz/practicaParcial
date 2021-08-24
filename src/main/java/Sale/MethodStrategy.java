@@ -1,7 +1,11 @@
 package Sale;
 
+import User.User;
+
+import java.io.IOException;
+
 public interface MethodStrategy {
 
-    public void charge(Integer price, Order order);
+    public void charge(Orden orden, User client) throws IOException;
 
 }

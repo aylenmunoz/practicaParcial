@@ -2,7 +2,10 @@ package Sale;
 
 import FarmaStore.FarmaStore;
 import Products.Product;
+import User.Client;
+import User.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,11 +24,11 @@ public class Cart {
         productsInCart.remove(product);
     }
 
-    public void charge(PaymentMethod method){
-        Order newOrder = new Order();
-        newOrder.createOrder(this);
+    public void charge(PaymentMethod method, User client) throws IOException {
+        Orden newOrden = new Orden();
+        newOrden.createOrder(this);
         MethodStrategy strategy = method.selectMethod(method);
-        strategy.charge(totalPrice, newOrder);
+        strategy.charge(newOrden, client);
         this.updateStockOfProds();
     }
 

@@ -1,18 +1,20 @@
 package Sale;
 
+import API.emailAPI;
 import FarmaStore.FarmaStore;
 import Products.Product;
+import User.User;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Scanner;
 
-public class Order {
+public class Orden {
     private Integer orderNumber = 0;
     private List<Product> productsInOrder;
     private String estimatedDelivery;
     private LocalDateTime date;
-    private Integer totalAmount;
+    private Integer totalPrice;
     private Cart cart;
     static FarmaStore store = FarmaStore.getInstance();
 
@@ -23,7 +25,7 @@ public class Order {
         this.setProductsInOrder(carrito.getProductsInCart());
         this.setEstimatedDelivery();
         this.setDate();
-        this.setTotalAmount(carrito);
+        this.setTotalPrice(carrito);
         store.addOrder(this);
     }
 
@@ -43,11 +45,33 @@ public class Order {
 
         }
 
-        System.out.println ("El total de la compra es: " + totalAmount + "\n");
+        System.out.println ("El total de la compra es: $" + totalPrice + "\n");
 
     }
+
+    public String emailOrder(){
+        String ordenNumber = "Su numero de orden es: " + this.getOrdenNumber().toString() + "\n";
+        String productosEnOrden = this.prodsInOrdenString() + "\n";
+        String precioTotal = "El costo total es: " + this.getTotalPrice().toString() + "\n";
+        String cuerpo = ordenNumber + productosEnOrden + precioTotal;
+        return cuerpo;
+    }
+    public String prodsInOrdenString(){
+        String cuerpoProducto = null;
+        for (int i=0; i < productsInOrder.size(); i++){
+            String namep = "Producto: " + productsInOrder.get(i).getName()  + "\t";
+            String pricep = "Precio unitario" + productsInOrder.get(i).getPrice().toString() + "\t";
+            String amountInCart = "Cantidad: " + productsInOrder.get(i).timesImInACart(cart).toString() + "\n";
+            cuerpoProducto = cuerpoProducto + namep + pricep + amountInCart;
+        }
+        return cuerpoProducto;
+    }
+    public void sendEmail(User client) throws IOException {
+        emailAPI.emailSend(this, client);
+    }
+
     // ------ GETTERS ------ //
-    public Integer getOrderNumber() {
+    public Integer getOrdenNumber() {
         return orderNumber;
     }
     public List<Product> getProductsInOrder() {
@@ -56,6 +80,7 @@ public class Order {
     public String getEstimatedDelivery() {
         return estimatedDelivery;
     }
+    public Integer getTotalPrice(){ return totalPrice;}
 
     // ------ SETTERS ------ //
     public void setOrderNumber() {
@@ -73,8 +98,8 @@ public class Order {
         this.date = LocalDateTime.now();
     }
 
-    public void setTotalAmount(Cart carrito){
-        totalAmount = carrito.getTotalPrice();
+    public void setTotalPrice(Cart carrito){
+        totalPrice = carrito.getTotalPrice();
     }
 
     public void setCart(Cart cart) {
